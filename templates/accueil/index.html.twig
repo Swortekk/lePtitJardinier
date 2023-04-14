@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccueilController!{% endblock %}
+
+{% block body %}
+
+
+{% block content %}
+<div class="mid">
+    <div class="formulaire">
+        <div class="shadows"> <img class="img " src="{{ asset('images/logo.png')}}">
+
+
+            <p>Le p'tit jardinier ! ✅
+                Des professionels à votre service.
+            </p>
+
+            {% if app.user != null %}
+            <p>Bienvenue {{ app.user.nom }} {{ app.user.prenom }}</p>
+            {% else %}
+            <p>Bienvenue</p>
+            {% endif %}
+
+        </div>
+    </div>
+
+    {% endblock %}
+
+    {% endblock %}

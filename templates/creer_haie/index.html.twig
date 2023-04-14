@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+
+
+{% block body %}
+{% block content %}
+<div class="mid">
+    <div class="formulaire dashed">
+        <h2>Ajouter un type de haie</h2>
+        <br>
+        {{ form(form) }}
+    </div>
+    <br>
+
+</div>
+{% endblock %}
+{% endblock %}

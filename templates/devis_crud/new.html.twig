@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Devis{% endblock %}
+
+{% block body %}
+{% block content %}
+<h1>Create new Devis</h1>
+
+{{ include('devis_crud/_form.html.twig') }}
+
+<a href="{{ path('app_devis_c_r_u_d_index') }}">back to list</a>
+{% endblock %}
+{% endblock %}

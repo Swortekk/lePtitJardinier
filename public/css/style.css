@@ -1,0 +1,221 @@
+.form-control {
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+
+}
+
+.mid {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+}
+
+.tableSize {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
+.img {
+    width: 350px;
+    height: auto;
+}
+
+.wrapper {
+    height: auto;
+    /*This part is important for centering*/
+    display: grid;
+    place-items: center;
+}
+
+
+
+/* BOUTON RADIO CSS */
+.wrapper2 {
+    text-align: center;
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 5%;
+    margin-bottom: 15%;
+}
+
+
+.wrapper2 .option {
+    margin-left: 30%;
+    margin-right: 30%;
+    background: #fff;
+    width: 40%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border: 2px solid lightgrey;
+    transition: all 0.3s ease;
+
+}
+
+
+.wrapper2 .option .dot {
+    height: 20px;
+    width: 20px;
+    background: #d9d9d9;
+    border-radius: 75%;
+    position: relative;
+
+}
+
+
+.wrapper2 .option .dot::before {
+    position: absolute;
+    content: "";
+    top: 4px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    background: beige;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(1.5);
+    transition: all 0.3s ease;
+    border: 5px dashed mediumseagreen;
+    box-shadow: 0 0 0 2.5px #226741,
+        inset 0 0 0 2.5px #226741, 0 1px 3px 5px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 6px beige,
+        inset 0 0 100vw 100vw beige;
+
+}
+
+
+input[type="radio"] {
+    display: none;
+}
+
+
+#option-1:checked:checked~.option-1,
+#option-2:checked:checked~.option-2 {
+    border-color: beige;
+    background: beige;
+    border: 5px dashed mediumseagreen;
+    box-shadow: 0 0 0 2.5px #226741,
+        inset 0 0 0 2.5px #226741, 0 1px 3px 5px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 6px beige,
+        inset 0 0 100vw 100vw beige;
+}
+
+
+#option-1:checked:checked~.option-1 .dot,
+#option-2:checked:checked~.option-2 .dot {
+    background: #fff;
+}
+
+
+#option-1:checked:checked~.option-1 .dot::before,
+#option-2:checked:checked~.option-2 .dot::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+.wrapper2 .option span {
+    font-size: 20px;
+    color: #808080;
+}
+
+
+#option-1:checked:checked~.option-1 span,
+#option-2:checked:checked~.option-2 span {
+    color: black;
+}
+
+
+.formulaire {
+
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 30px;
+
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+
+
+}
+
+
+.form-select {
+    width: auto;
+    margin: auto;
+}
+
+
+.formulaire input {
+    margin-bottom: 20px;
+}
+
+
+.formulaire label {
+    margin-bottom: 10px;
+}
+
+
+.formulaire btn btn-success {
+    margin-top: 10px;
+
+}
+
+
+.tableau {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 30px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    border-radius: 30px;
+}
+
+.menu {
+    margin-top: auto;
+    background-color: whitesmoke;
+
+}
+
+.menu a {
+
+    font-size: large;
+}
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: white;
+
+
+}
+
+
+.devis {
+    padding: 20px;
+    height: auto;
+    width: 21%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    margin-left: 39.5%;
+    margin-right: 39.5%;
+
+}
+
+.info {
+    padding: 20px;
+    height: auto;
+    width: 30%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    margin-left: 35%;
+    margin-right: 35%;
+
+}

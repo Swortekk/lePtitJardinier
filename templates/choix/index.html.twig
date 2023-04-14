@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChoixController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper {
+        margin: 1em auto;
+        max-width: 800px;
+        width: 95%;
+        font: 18px/1.5 sans-serif;
+    }
+
+    .example-wrapper code {
+        background: #F5F5F5;
+        padding: 2px 6px;
+    }
+</style>
+{% block content %}
+
+<div class="mid">
+    <h1>Vous êtes un(e)</h1>
+    <div class="wrapper2">
+        <form action="mesure" method="post">
+            {% if user =='P' %}
+            <input type="radio" name="choix" id="option-2" disabled value="2">
+            <input type="radio" name="choix" id="option-1" checked value="1">
+            {% else %}
+            <input type="radio" name="choix" id="option-2" checked value="2">
+            <input type="radio" name="choix" id="option-1" disabled value="1">
+            {% endif %}
+            <label for="option-1" class="option option-1">
+                <div class="dot"></div>
+                <span>Particulier</span>
+            </label>
+            <label for="option-2" class="option option-2">
+                <div class="dot"></div>
+                <span>Entreprise</span>
+            </label>
+            <br>
+            <input type="submit" class="btn btn-success" value="Continuer"></input>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Haie index{% endblock %}
+
+{% block body %}
+{% block content %}
+<div class="mid">
+    <div class="tableau">
+        <h1>Liste des haies</h1>
+        <br> <br>
+        <table class="table table-striped table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for haie in haies %}
+                <tr>
+                    <td>{{ haie.code }}</td>
+                    <td>{{ haie.nom }}</td>
+                    <td>{{ haie.prix }}</td>
+                    <td>
+                        {# AFFICHER #}
+
+                        <a href="{{ path('app_haie_c_r_u_d_show', {'code': haie.code}) }}">
+
+                            <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="hover"
+                                style="width:40px;height:40px">
+                        </a>
+                    </td>
+                    <td>
+                        {# MODIFIER #} <a href="{{ path('app_haie_c_r_u_d_edit', {'code': haie.code}) }}">
+                            <lord-icon src="https://cdn.lordicon.com/wloilxuq.json" trigger="hover"
+                                style="width:40px;height:40px">
+                            </lord-icon>
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+{% endblock %}
+{% endblock %}
