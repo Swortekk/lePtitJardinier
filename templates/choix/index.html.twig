@@ -20,14 +20,20 @@
 
 <div class="mid">
     <h1>Vous êtes un(e)</h1>
+
     <div class="wrapper2">
         <form action="mesure" method="post">
-            {% if user =='P' %}
-            <input type="radio" name="choix" id="option-2" disabled value="2">
-            <input type="radio" name="choix" id="option-1" checked value="1">
-            {% else %}
-            <input type="radio" name="choix" id="option-2" checked value="2">
-            <input type="radio" name="choix" id="option-1" disabled value="1">
+            {% if typeClient =='P' %}
+            <input type="radio" name="choix" id="option-2" disabled value="E">
+            <input type="radio" name="choix" id="option-1" checked value="P">
+            {% endif %}
+            {% if typeClient =='E'%}
+            <input type="radio" name="choix" id="option-2" checked value="E">
+            <input type="radio" name="choix" id="option-1" disabled value="P">
+            {% endif %}
+            {% if typeClient ==''%}
+            <input type="radio" name="choix" id="option-2" value="E">
+            <input type="radio" name="choix" id="option-1" value="P">
             {% endif %}
             <label for="option-1" class="option option-1">
                 <div class="dot"></div>

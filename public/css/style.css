@@ -84,9 +84,9 @@
     opacity: 0;
     transform: scale(1.5);
     transition: all 0.3s ease;
-    border: 5px dashed mediumseagreen;
-    box-shadow: 0 0 0 2.5px #226741,
-        inset 0 0 0 2.5px #226741, 0 1px 3px 5px rgba(0, 0, 0, 0.5),
+
+    box-shadow: 0 0 0 2.5px #198754,
+        inset 0 0 0 2.5px #198754, 0 1px 3px 5px rgba(0, 0, 0, 0.5),
         inset 0 0 0 6px beige,
         inset 0 0 100vw 100vw beige;
 
@@ -102,9 +102,9 @@ input[type="radio"] {
 #option-2:checked:checked~.option-2 {
     border-color: beige;
     background: beige;
-    border: 5px dashed mediumseagreen;
-    box-shadow: 0 0 0 2.5px #226741,
-        inset 0 0 0 2.5px #226741, 0 1px 3px 5px rgba(0, 0, 0, 0.5),
+
+    box-shadow: 0 0 0 2.5px #198754,
+        inset 0 0 0 2.5px #198754, 0 1px 3px 5px rgba(0, 0, 0, 0.5),
         inset 0 0 0 6px beige,
         inset 0 0 100vw 100vw beige;
 }

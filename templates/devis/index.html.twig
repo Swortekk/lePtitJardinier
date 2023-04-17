@@ -1,62 +1,77 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DevisController!{% endblock %}
+{% block title %}Hello DevisController!
+{% endblock %}
 
 {% block body %}
 
-{% block content %}
-<div class="mid">
-    <div class="devis">
+	{% block content %}
+		<div class="mid">
+			<div class="devis">
 
-        <lord-icon src="https://cdn.lordicon.com/nrxxmbbt.json" trigger="hover" style="width:100px;height:100px">
-        </lord-icon>
-        <h2>Récapitulatif de votre demande</h2>
-        <br>
-        <p> {% set montantRemise = 0 %}
-            {% set montantDevis = 0 %}
-            {% set remise = 0.1 %}
-            {% set prix = maHaie.getPrix() * longueur %}
+				<lord-icon src="https://cdn.lordicon.com/nrxxmbbt.json" trigger="hover" style="width:100px;height:100px"></lord-icon>
+				<h2>Récapitulatif de votre demande</h2>
+				<br>
+				<p>
+					{% set montantRemise = 0 %}
+					{% set montantDevis = 0 %}
+					{% set remise = 0.1 %}
+					{% set prix = maHaie.getPrix() * longueur %}
 
-            Vous êtes
-            {% if (user == 'E') %}
-            une <strong>entreprise</strong> (vous bénéficiez d'une remise de 10%).
+					Vous êtes
+					{% if ( typeClient == 'E') %}
+						une
+						<strong>entreprise</strong>
+						(vous bénéficiez d'une remise de 10%).
 
-            {% else %}
-            un <strong>particulier</strong>
+					{% else %}
+						un
+						<strong>particulier</strong>
 
-            {% endif %}
-        </p>
-        <p>
-            <strong>Rappel --</strong> Mesures de la haie :
-        </p>
-        <p> Longueur <strong>{{longueur}}m</strong> Hauteur <strong>{{hauteur}}m</strong></p>
-
-
-        {% if hauteur > 1.50 %}
-        {% set prix = prix * 1.50 %}
-        {% endif %}
-
-        {% set montantRemise = prix * remise %}
-
-        {% if user == 2 %}
-        {% set montantDevis = prix - montantRemise %}
-        Vous avez obtenu une remise de <strong>{{montantRemise}} €</strong>
-        {% else %}
-        {% set montantDevis = prix %}
-        {% endif %}
-        </p>
-        <p>
-            Le montant de votre de devis est de <strong> {{montantDevis}} €</strong>
-        </p>
-        {% if app.user == null %}
-        <a class="btn btn-danger" href="{{path('app_register')}}">Veuillez vous inscrire pour créér un devis</a>
-        {% else %}
-        <a class="btn btn-success" href="{{path('app_user_c_r_u_d_edit')}}">Générer le devis</a>
-        {% endif %}
-    </div>
-</div>
+					{% endif %}
+				</p>
+				<p>
+					<strong>Rappel --</strong>
+					Mesures de la haie :
+				</p>
+				<p>
+					Longueur
+					<strong>{{longueur}}m</strong>
+					Hauteur
+					<strong>{{hauteur}}m</strong>
+				</p>
 
 
+				{% if hauteur > 1.50 %}
+					{% set prix = prix * 1.50 %}
+				{% endif %}
 
-{% endblock %}
-{% endblock %}
+				{% set montantRemise = prix * remise %}
+
+				{% if typeClient == 'E' %}
+					{% set montantDevis = prix - montantRemise %}
+					Vous avez obtenu une remise de
+					<strong>{{montantRemise}}
+						€</strong>
+				{% else %}
+					{% set montantDevis = prix %}
+				{% endif %}
+			</p>
+			<p>
+				Le montant de votre de devis est de
+				<strong>
+					{{montantDevis}}
+					€</strong>
+			</p>
+			{% if app.user == null %}
+				<a class="btn btn-danger" href="{{path('app_register')}}">Veuillez vous inscrire pour créér un devis</a>
+				<br>
+				<a href="{{path('app_login')}}">Vous êtes déjà inscrit ? Connectez-vous</a>
+			{% else %}
+				<a class="btn btn-success" href="{{path('app_generer_devis')}}">Générer le devis</a>
+			{% endif %}
+		</div>
+	</div>
+
+
+{% endblock %}{% endblock %}

@@ -16,6 +16,8 @@
             <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Nom Client</th>
+                    <th>Prenom Client</th>
                     <th>Date</th>
                     <th>Longueur</th>
                     <th>Hauteur</th>
@@ -27,6 +29,8 @@
                 {% for devi in devis %}
                 <tr>
                     <td>{{ devi.id }}</td>
+                    <td>{{  }}</td>
+                    <td>{{  }}</td>
                     <td>{{ devi.date ? devi.date|date('Y-m-d') : '' }}</td>
                     <td>{{ devi.longueur }}</td>
                     <td>{{ devi.hauteur }}</td>

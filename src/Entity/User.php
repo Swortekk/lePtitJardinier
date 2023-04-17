@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-
+use App\Entity\Devis;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -232,33 +232,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Devis>
-     */
-    public function getDevis(): Collection
+
+    public function __toString(): string
     {
-        return $this->devis;
+        return $this->getEmail();
     }
 
-    public function addDevi(Devis $devi): self
-    {
-        if (!$this->devis->contains($devi)) {
-            $this->devis[] = $devi;
-            $devi->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDevi(Devis $devi): self
-    {
-        if ($this->devis->removeElement($devi)) {
-            // set the owning side to null (unless already changed)
-            if ($devi->getUser() === $this) {
-                $devi->setUser(null);
-            }
-        }
-
-        return $this;
-    }
+  
+   
 }

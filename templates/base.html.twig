@@ -72,11 +72,11 @@
                             Gestion des utilisateurs
                         </a>
                         <ul class="dropdown-menu">
-                            <li> <a class="dropdown-item" href="">Consulter les
+                            <li> <a class="dropdown-item" href="{{ path('app_user_c_r_u_d_index') }}">Consulter les
                                     utilisateurs</a></li>
 
 
-                            <li> <a class=" dropdown-item" href="">Créer
+                            <li> <a class=" dropdown-item" href="{{ path('app_user_c_r_u_d_new') }}">Créer
                                     un nouvel utilisateur</a></li>
                         </ul>
                     </li>
@@ -92,6 +92,21 @@
                                     les haies</a></li>
                             <li><a class="dropdown-item" <a href="{{ path('app_haie_c_r_u_d_new') }}">Créer une
                                     nouvelle haie</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class=" nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Gestion des catégories
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li> <a class="dropdown-item" href="{{ path('app_categorie_c_r_u_d_index') }}">Consulter
+                                    les catégories</a></li>
+                            <li><a class="dropdown-item" <a href="{{ path('app_categorie_c_r_u_d_new') }}">Créer une
+                                    nouvelle catégorie</a>
                             </li>
                         </ul>
                     </li>

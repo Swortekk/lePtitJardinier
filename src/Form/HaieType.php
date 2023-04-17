@@ -22,10 +22,9 @@ class HaieType extends AbstractType
             ->add('prix', TextType::class, [
                 'attr' => ['class' => 'form-control']
             ])
-            ->add('categorie', TextType::class, [
-                'attr' => ['class' => 'form-control']
-            ])
-        ;
+            ->add(
+                'categorie'
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

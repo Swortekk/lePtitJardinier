@@ -15,19 +15,15 @@ class MesureController extends AbstractController
     /**
      * @Route("/mesure", name="app_mesure")
      */
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(Request $request, ManagerRegistry $doctrine): Response
     {
 
-        $request = Request::createFromGlobals();
+        $req = Request::createFromGlobals();
         $session = new Session();
 
-
-
-        $choix = $request->get('choix');
-        $user = $session->set('user', $choix);
-
-
-
+        $choix = $req->get('choix');
+    
+        $typeClient = $session->set('typeClient', $choix);
 
         $mesHaies = $doctrine->getRepository(Haie::class)->findAll();
 

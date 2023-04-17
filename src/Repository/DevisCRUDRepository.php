@@ -39,6 +39,8 @@ class DevisCRUDRepository extends ServiceEntityRepository
         }
     }
 
+    
+
 //    /**
 //     * @return DevisCRUD[] Returns an array of DevisCRUD objects
 //     */

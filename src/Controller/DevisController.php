@@ -15,34 +15,33 @@ class DevisController extends AbstractController
     /**
      * @Route("/devis", name="app_devis")
      */
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(Request $request, ManagerRegistry $doctrine): Response
     {
 
 
-        $request = Request::createFromGlobals();
+        $req = Request::createFromGlobals();
 
+        $session = $request->getSession();
+        $longueur = $req->get('txtLongueur');
+        $hauteur = $req->get('txtHauteur');
+        $type = $req->get('txtType');
 
-        $longueur = $request->get('txtLongueur');
-        $hauteur = $request->get('txtHauteur');
-        $type = $request->get('txtType');
+        $session->set('hauteur', $hauteur);
+        $session->set('longueur', $longueur);
+        $session->set('typeHaie', $type);
 
-
-        $session = new Session();
-
-
-        $user = $session->get('user');
-        $longueur_session = $session->set('longueur', $longueur);
-        $hauteur_session = $session->set('hauteur', $hauteur);
-        $typeHaie_session = $session->set('typeHaie', $type);
 
         $maHaie = $doctrine->getRepository(Haie::class)->find($type);
+        
+        $typeClient = $session->get('typeClient');
+   
 
 
         return $this->render('devis/index.html.twig', [
             'controller_name' => 'DevisController',
             'longueur' => $longueur,
             'hauteur' => $hauteur,
-            'user' => $user,
+            'typeClient' =>  $typeClient,
             'maHaie' => $maHaie
 
         ]);

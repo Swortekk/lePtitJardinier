@@ -19,8 +19,13 @@ class DevisCRUDController extends AbstractController
     /**
      * @Route("/", name="app_devis_c_r_u_d_index", methods={"GET"})
      */
-    public function index(DevisRepository $devisRepository): Response
+    public function index(DevisRepository $devisRepository , ManagerRegistry $doctrine) : Response
     {
+        $entityManager = $doctrine->getManager();
+
+      
+
+
         return $this->render('devis_crud/index.html.twig', [
             'devis' => $devisRepository->findAll(),
         ]);

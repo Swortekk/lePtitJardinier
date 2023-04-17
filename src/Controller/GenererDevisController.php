@@ -25,42 +25,41 @@ class GenererDevisController extends AbstractController
     public function index(Request $request, ManagerRegistry $doctrine): Response
     {
 
-
-
         $session = $request->getSession();
-
-
-
 
         $entityManager = $doctrine->getManager();
 
-
-        $typehaie = $session->get('typeHaie');
+        $typeHaie = $session->get('typeHaie');
         $longueur = $session->get('longueur');
         $hauteur = $session->get('hauteur');
 
-        $maHaie = $doctrine->getRepository(Haie::class)->find($typehaie);
 
-        $devis = new Devis();
-        $devis->setUser($this->getUser());
-        $devis->setHaie($maHaie);
-        $devis->setHauteur($hauteur);
-        $devis->setLongueur($longueur);
+        $maHaie = $doctrine->getRepository(Haie::class)->find($typeHaie);
 
 
-        $date = new DateTime('now');
-        $devis->setDate($date);
+        if (!empty($this->getUser())) {
+            $mail = $this->getUser()->getUserIdentifier();
+            $monUser = new User();
+            $monUser = $doctrine->getRepository(User::class)->findOneBy(array('email' => $mail));
 
-        $entityManager->persist($devis);
-        $entityManager->flush();
 
-        return $this->render('devis/index.html.twig', [
-            'controller_name' => 'DevisController',
-            'longueur' => $longueur,
-            'hauteur' => $hauteur,
-            'user' => $this->getUser()->getTypeClient(),
-            'maHaie' => $maHaie
+            $devis = new Devis();
+            $devis->setUser($monUser);
+            $devis->setHaie($maHaie);
+            $devis->setHauteur($hauteur);
+            $devis->setLongueur($longueur);
 
-        ]);
+
+            $date = new DateTime('now');
+            $devis->setDate($date);
+
+            $entityManager->persist($devis);
+            $entityManager->flush();
+
+            return $this->render('generer_devis/index.html.twig', [
+                'controller_name' => 'GenererDevisController',
+
+            ]);
+        }
     }
 }

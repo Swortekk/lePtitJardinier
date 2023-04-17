@@ -1,10 +1,18 @@
 {% extends 'base.html.twig' %}
 
 
-
 {% block body %}
-{% block content %}
+	{% block content %}
 
-{{ form(form) }}
-{% endblock %}
+		<div class="mid">
+			<div class="formulaire">
+            coucou
+			{{ hauteur }}
+			{{ longueur }}
+			{{ typeHaie }}
+			{{ user.getNom }}
+	
+            </div>
+		</div>
+	{% endblock %}
 {% endblock %}
