@@ -2,57 +2,121 @@
 
 {% block title %}User{% endblock %}
 
-{% block body %}
-    <h1>User</h1>
+{% block content %}
+<style>
+    /* Global styles */
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ user.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ user.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ user.ville }}</td>
-            </tr>
-            <tr>
-                <th>Cp</th>
-                <td>{{ user.cp }}</td>
-            </tr>
-            <tr>
-                <th>Type_client</th>
-                <td>{{ user.typeClient }}</td>
-            </tr>
-        </tbody>
-    </table>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-    <a href="{{ path('app_user_c_r_u_d_index') }}">back to list</a>
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+    }
 
-    <a href="{{ path('app_user_c_r_u_d_edit', {'id': user.id}) }}">edit</a>
+    a {
+        text-decoration: none;
+        color: #333;
+    }
 
-    {{ include('user_crud/_delete_form.html.twig') }}
+    ul {
+        list-style: none;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+</style>
+
+
+<div class="formulaire">
+    <main>
+        <section>
+            {% if app.user.email  == "admin@gmail.com" %}
+            <h1>Informations de l'utilisateur</h1>
+            {% elseif user.roles == ["ROLE_USER"] %}
+            <h1>Mes informations personnelles</h1>
+            {% endif %}
+
+            <div class="container">
+                <ul>
+                    <li>
+                        <strong>Nom :</strong>
+                        <span> {{user.nom}} </span>
+                    </li>
+                    <li>
+                        <strong>Prénom :</strong>
+                        <span>{{user.prenom}}</span>
+                    </li>
+                    <li>
+                        <strong>Email :</strong>
+                        <span>{{user.email}}</span>
+                    </li>
+                  
+                </ul>
+            </div>
+        </section>
+        <section>
+            {% if app.user.email  == "admin@gmail.com" %}
+            <h1>Adresse de l'utilisateur</h1>
+            {% elseif user.roles == ["ROLE_USER"] %}
+            <h1>Mon adresse</h1>
+            {% endif %}
+     
+            <div class="container">
+                <ul>
+                    <li>
+                        <strong>Adresse :</strong>
+                        <span>{{user.adresse}}</span>
+                    </li>
+                    <li>
+                        <strong>Code postal :</strong>
+                        <span>{{user.cp}}</span>
+                    </li>
+                    <li>
+                        <strong>Ville :</strong>
+                        <span>{{user.ville}}</span>
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+        <section>
+            {% if app.user.email  == "admin@gmail.com" %}
+            <h1>Compte de l'utilisateur</h1>
+            {% elseif user.roles == ["ROLE_USER"] %}
+            <h1>Mon compte</h1>
+            {% endif %}
+            <div class="container">
+                <ul>
+                    <li>
+                        <strong>Identifiant :</strong>
+                        <span>{{user.email}}</span>
+                    </li>
+                    <li>
+                        <strong>Mot de passe :</strong>
+                        <span>********</span>
+                    </li>
+                    <li>
+                        <strong>Permissions :</strong>
+                        {% if user.roles  == ["ROLE_ADMIN","ROLE_USER"] %}
+                        <span>Administrateur</span>
+                        {% elseif user.roles == ["ROLE_USER"] %}
+                        <span>Utilisateur</span>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        <a class="btn" href="{{ path('app_user_c_r_u_d_edit', {'id': user.id}) }}">Modifier</a>
+        
+    </main>
+</div>
+
+
 {% endblock %}

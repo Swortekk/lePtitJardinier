@@ -2,33 +2,30 @@
 
 {% block title %}Hello MesureController!{% endblock %}
 
-{% block body %}
 {% block content %}
 
 
-<div class="mid">
 
-    <div class="formulaire dashed">
-        <h1>Les dimensions de votre haie</h1>
+<div class="formulaire">
+    <h1>Les dimensions de votre haie</h1>
+    <br>
+    <form action="devis" method="post">
+        <select class="form-select" name="txtType" required>
+            <option value="" selected>Choisir votre type de haie</option>
+            {% for item in mesHaies %}
+            <option value="{{ item.getCode() }}"> {{ item.getNom() }}</option>
+            {% endfor %}
+        </select>
         <br>
-        <form action="devis" method="post">
-            <select class="form-select" name="txtType">
-                <option selected>Choisir votre type de haie</option>
-                {% for item in mesHaies %}
-                <option value="{{ item.getCode() }}"> {{ item.getNom() }}</option>
-                {% endfor %}
-            </select>
-            <br>
-            <label>Longueur :</label>
-            <input class="form-control" type="text" name="txtLongueur">
-            <label>Hauteur : </label>
-            <input class="form-control" type="text" name="txtHauteur">
-            <br>
-            <input class="btn btn-success" type="submit" value="Continuer" name="btnMesure">
-        </form>
-    </div>
+
+        <input class="form-control" placeholder="Longueur" type="text" name="txtLongueur" required>
+        <input class="form-control" placeholder="Hauteur" type="text" name="txtHauteur" required>
+        <br>
+
+        <input class="btn " type="submit" value="Continuer" name="btnMesure">
+    </form>
 </div>
 
 
-{% endblock %}
+
 {% endblock %}

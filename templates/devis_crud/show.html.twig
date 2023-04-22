@@ -2,35 +2,143 @@
 
 {% block title %}Devis{% endblock %}
 
-{% block body %}
+
 {% block content %}
-<h1>Devis</h1>
 
-<table class="table">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ devi.id }}</td>
-        </tr>
-        <tr>
-            <th>Date</th>
-            <td>{{ devi.date ? devi.date|date('Y-m-d') : '' }}</td>
-        </tr>
-        <tr>
-            <th>Longueur</th>
-            <td>{{ devi.longueur }}</td>
-        </tr>
-        <tr>
-            <th>Hauteur</th>
-            <td>{{ devi.hauteur }}</td>
-        </tr>
-    </tbody>
-</table>
 
-<a href="{{ path('app_devis_c_r_u_d_index') }}">back to list</a>
+<head>
+    <meta charset="UTF-8">
+    <title>Devis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-<a href="{{ path('app_devis_c_r_u_d_edit', {'id': devi.id}) }}">edit</a>
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+        }
 
-{{ include('devis_crud/_delete_form.html.twig') }}
-{% endblock %}
-{% endblock %}
+        h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        .total {
+            text-align: right;
+        }
+
+        footer {
+            background-color: #ddd;
+            color: #555;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <div class="tableau">
+        <main>
+            {% for info in monDevis %}
+            <h2>Informations sur le devis</h2>
+            <br>
+            <p><strong>Référence :</strong> {{info.id}} </p>
+            <p><strong>Date :</strong> {{date}}</p>
+            <p><strong>Client :</strong> {{info.user_nom}} {{info.prenom}}</p>
+            <p><strong>Adresse :</strong> {{info.adresse}}, {{info.cp}}, {{info.ville}} </p>
+            <p><strong>Email :</strong> {{info.email}}</p>
+
+            <h2>Détails de la commande</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Taillage de haie</th>
+                        <th>Hauteur</th>
+                        <th>Longueur</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% set remise = 0.1 %}
+                    {% set montantDevis = 0 %}
+                    <tr>
+                        <td>{{info.haie_nom}}</td>
+                        <td>{{info.hauteur}}</td>
+                        <td>{{info.longueur}}</td>
+
+
+                        <td>
+                            {% if ( typeClient == 'P') %}
+                            {% set montantDevis = info.longueur * info.prix %}
+                            {{ info.longueur * info.prix}} €
+                            {% else %}
+                            {% set montantDevis = info.longueur * info.prix - (info.longueur * info.prix) * remise %}
+                            {{info.longueur * info.prix }} €
+                            {% endif %}
+                        </td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td colspan="3" class="total">Total sans remise :</td>
+                        <td> {{ info.longueur * info.prix}} €</td>
+                    </tr>
+                    {% if ( typeClient == 'E') %}
+                    <tr>
+                        <td colspan="3" class="total">Total avec remise (10%) :</td>
+                        <td> {{info.longueur * info.prix - (info.longueur * info.prix) * remise}} €</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td colspan="3" class="total"><strong>Total :</strong></td>
+                        <td><strong>{{montantDevis}} €</strong></td>
+                    </tr>
+
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+            
+
+            <a href="{{ path('app_accueil') }}"><lord-icon src="https://cdn.lordicon.com/wjhsmbda.json"
+                    trigger="hover" style="width:47px;height:47px">
+                </lord-icon></a>
+
+            <a>{{ include('devis_crud/_delete_form.html.twig') }}</a>
+
+        </main>
+    </div>
+
+
+    {% endblock %}

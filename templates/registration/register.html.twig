@@ -5,26 +5,49 @@
 {% block body %}
 
 {% block content %}
-<div class="mid">
-    <div class="formulaire">
-        <h1>Inscrivez-vous</h1>
-        <br>
 
-        {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.nom)}}
-        {{ form_row(registrationForm.prenom)}}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-        {{ form_row(registrationForm.plainPassword, {
-        label: 'Password'
-        }) }}
+<style>
+    .formulaire a {
+        display: block;
+        margin-bottom: 12px;
+    }
 
-        <button type="submit" class="btn btn-success">Register</button>
+  
 
-        {{ form_end(registrationForm) }}
-        <br>
-        <a href="{{ path('app_login') }}">Vous avez déjà un compte ? Connectez-vous</a>
-    </div>
+    #termes{
+        margin-top: 20px;
+        color: #E9D985;
+        font-weight: 600;
+
+    }
+</style>
+<div class="formulaire">
+
+    <h1>Inscrivez-vous</h1>
+
+
+    <a>{{ form_start(registrationForm) }}</a>
+    <a>{{ form_row(registrationForm.nom)}}</a>
+    <a>{{ form_row(registrationForm.prenom)}}</a>
+    <a>{{ form_row(registrationForm.email) }}</a>
+    <a>{{ form_row(registrationForm.adresse) }}</a>
+    <a>{{ form_row(registrationForm.cp) }}</a>
+    <a>{{ form_row(registrationForm.ville) }}</a>
+   
+
+    <a>{{ form_row(registrationForm.plainPassword) }}</a>
+
+    <a>{{ form_row(registrationForm.typeClient) }}</a>
+
+    <a id="termes">{{ form_row(registrationForm.agreeTerms) }}</a>
+
+    <a><button type="submit" class="btn ">S'inscrire</button></a>
+
+    {{ form_end(registrationForm) }}
+
+    <a href="{{ path('app_login') }}">Vous avez déjà un compte ? Connectez-vous</a>
+
 </div>
+
 {% endblock %}
 {% endblock %}

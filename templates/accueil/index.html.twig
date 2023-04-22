@@ -2,28 +2,45 @@
 
 {% block title %}Hello AccueilController!{% endblock %}
 
-{% block body %}
-
-
 {% block content %}
-<div class="mid">
-    <div class="formulaire">
-        <div class="shadows"> <img class="img " src="{{ asset('images/logo.png')}}">
+<style>
 
+    .accueil{
+      
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      
+    }
+    .img {
+        margin-top: 5%;
+        width: 350px;     
+    }
 
-            <p>Le p'tit jardinier ! ✅
-                Des professionels à votre service.
-            </p>
+    h1 {
+        margin-top: 20px;
+        color: #dbdaea;
+    }
 
-            {% if app.user != null %}
-            <p>Bienvenue {{ app.user.nom }} {{ app.user.prenom }}</p>
-            {% else %}
-            <p>Bienvenue</p>
-            {% endif %}
+    h3 {
+        margin-top: 20px;
+        color: #dbdaea;
+    }
+</style>
 
-        </div>
-    </div>
+<div class="accueil">
+    <img class="img " src="{{ asset('images/logo.png')}}">
 
-    {% endblock %}
+<h1>Le p'tit jardinier ! ✅
+    Des professionels à votre service.</h1>
 
-    {% endblock %}
+{% if app.user != null %}
+<h3>Bienvenue {{ app.user.nom }} {{ app.user.prenom }}</h3>
+{% else %}
+<h3>Bienvenue</h3>
+{% endif %}
+
+</div>
+{% endblock %}
+

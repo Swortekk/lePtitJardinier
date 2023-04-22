@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -20,33 +21,51 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label' => 'E-mail'
+                'attr' => ['class' => 'form-control', 'placeholder' => 'E-mail'],
+                'label' => false
+             
+               
             ])
             ->add('nom', TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label' => 'Nom'
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Nom'],
+                'label' => false
+               
             ])
             ->add('prenom', TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label' => 'Prénom'
+                'attr' => ['class' => 'form-control',   'placeholder' => 'Prénom'],
+                'label' => false
+                
             ])
             ->add('adresse', TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label' => 'Adresse'
+                'attr' => ['class' => 'form-control',  'placeholder' => 'Adresse'],
+                'label' => false
+           
             ])
             ->add('ville', TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label' => 'Ville'
+                'attr' => ['class' => 'form-control',  'placeholder' => 'Ville'],
+                'label' => false
+              
             ])
             ->add('cp', TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label' => 'Code Postale'
+                'attr' => ['class' => 'form-control',  'placeholder' => 'Code Postale'],
+                'label' => false
+                
             ])
-            ->add('type_client', TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label' => 'Type Client'
+
+            ->add('typeClient', ChoiceType::class, [
+        
+                'choices' => [
+                    'Particulier' => 'P',
+                    'Entreprise' => 'E',
+                ],
+                'placeholder' => 'Selectionner un type de client',
+             
+                'multiple' => false,
+                'required' => true, 
+                'attr' => ['class' => 'form-select lg'],
+                'label' => false
             ])
+
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -54,18 +73,21 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
-                'attr' => ['class' => ''],
+                'attr' => ['class' => 'form-check-input'],
+                'label' => 'Accepter les conditions d\'utilisation',
 
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password', 'class' => 'form-control'],
+                'label' => false,
+                'attr' => ['autocomplete' => 'new-password', 'class' => 'form-control', 'placeholder' => 'Mot de passe'],
 
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
+                        
                     ]),
                     new Length([
                         'min' => 6,
@@ -74,8 +96,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

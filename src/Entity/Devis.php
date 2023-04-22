@@ -34,7 +34,7 @@ class Devis
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="devis")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
      */
     private $user;
 

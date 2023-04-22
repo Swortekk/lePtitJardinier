@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Devis;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @extends ServiceEntityRepository<Devis>
@@ -39,28 +40,55 @@ class DevisRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Devis[] Returns an array of Devis objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('d.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?Devis
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function getAllDevisInformations()
+    {
+        $qb = $this->createQueryBuilder('d');
+        $qb->select('d.id', 'd.date', 'u.nom as user_nom', 'u.prenom', 'h.nom as haie_nom', 'h.prix', 'd.longueur', 'd.hauteur')
+           ->innerJoin('d.user', 'u')
+           ->innerJoin('d.haie', 'h')
+           ->orderBy('d.date', 'DESC');
+    
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getDevisInformationById(Devis $devis)
+    {
+        $qb = $this->createQueryBuilder('d');
+        $qb->select('d.id', 'd.date', 'u.nom as user_nom', 'u.prenom', 'u.cp', 'u.adresse','u.ville','u.email', 'u.type_client', 'h.nom as haie_nom', 'h.prix', 'd.longueur', 'd.hauteur')
+           ->innerJoin('d.user', 'u')
+           ->innerJoin('d.haie', 'h')
+           ->setParameter('id', $devis->getId())
+           ->where('d.id = :id')
+           ->orderBy('d.date', 'DESC'); 
+    
+        return $qb->getQuery()->getResult();
+    }
+
 }
+
+    //    /**
+    //     * @return Devis[] Returns an array of Devis objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('d')
+    //            ->andWhere('d.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('d.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Devis
+    //    {
+    //        return $this->createQueryBuilder('d')
+    //            ->andWhere('d.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+

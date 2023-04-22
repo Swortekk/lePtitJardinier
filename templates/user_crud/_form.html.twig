@@ -1,4 +1,23 @@
+{% block content %}
+<style>
+    .formulaire a {
+        display: block;
+        margin-bottom: 12px;
+    }
+</style>
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<a>{{ form_start(form) }}</a>
+<a>{{ form_row(form.nom)}}</a>
+<a>{{ form_row(form.prenom)}}</a>
+<a>{{ form_row(form.email) }}</a>
+<a>{{ form_row(form.adresse) }}</a>
+<a>{{ form_row(form.cp) }}</a>
+<a>{{ form_row(form.ville) }}</a>
+<a>{{ form_row(form.plainPassword) }}</a>
+
+<a>{{ form_row(form.typeClient) }}</a>
+
+<button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
+{% endblock %}
+

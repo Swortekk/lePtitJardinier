@@ -22,6 +22,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
     {% endblock %}
 
     {% block javascripts %}
@@ -29,11 +30,40 @@
     {% endblock %}
 </head>
 
+
 <body>
-
+    <style>
+            
+        .menu {
+            background-color: #4B6C21;
+            color: #dbdaea;
+        
+        }
+        
+        .menu a {
+            color: #dbdaea;
+            font-size: large;
+            margin-left: 10px;
+        }
+        
+        
+        .sousmenu {
+            background-color: #4B6C21;
+            color: #dbdaea;
+            width: fit-content;
+        
+        }
+        
+        .sousmenu a:hover {
+            background-color: #4B6C21;
+            
+        
+        }
+        .menu a:hover{
+           color: #E9D985;
+        }
+    </style>
     <!-- Navbar content -->
-
-
 
     <nav class="navbar navbar-expand-lg menu">
         <div class="container-fluid">
@@ -42,9 +72,14 @@
                 Le p'tit j@rdinier
             </a>
             {% if (app.user == null) or (is_granted('ROLE_USER')) %}
-            <a class="navbar-brand" href="{{ path('app_choix') }}">
+            <a class="navbar-brand" href="{{ path('app_mesure') }}">
                 Faire un devis en ligne
             </a>
+            {% if is_granted('ROLE_USER') %}
+            <a class="navbar-brand" href="{{ path('app_show_devis_by_user') }}">
+                Vos devis
+            </a>
+            {% endif %}
             {% endif %}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,59 +88,65 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     {% if is_granted('ROLE_ADMIN') %}
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Gestion des devis
                         </a>
-                        <ul class="dropdown-menu">
-                            <li> <a class="dropdown-item" href="{{ path('app_devis_c_r_u_d_index') }}">Consulter les
+                        <ul class="dropdown-menu sousmenu">
+                            <li> <a class="dropdown-item sousmenu"
+                                    href="{{ path('app_devis_c_r_u_d_index') }}">Consulter les
                                     devis</a></li>
-                            <li><a class="dropdown-item" href="{{ path('app_choix') }}">Créer un nouveau devis</a>
+
+                            <li><a class="dropdown-item sousmenu" href="{{ path('app_mesure') }}">Créer un nouveau
+                                    devis</a>
                             </li>
+
                         </ul>
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <li class="nav-item dropdown sousmenu">
+                        <a class="nav-link dropdown-toggle sousmenu" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Gestion des utilisateurs
                         </a>
-                        <ul class="dropdown-menu">
-                            <li> <a class="dropdown-item" href="{{ path('app_user_c_r_u_d_index') }}">Consulter les
+                        <ul class="dropdown-menu sousmenu">
+                            <li> <a class="dropdown-item sousmenu" href="{{ path('app_user_c_r_u_d_index') }}">Consulter
+                                    les
                                     utilisateurs</a></li>
 
 
-                            <li> <a class=" dropdown-item" href="{{ path('app_user_c_r_u_d_new') }}">Créer
+                            <li> <a class=" dropdown-item sousmenu" href="{{ path('app_user_c_r_u_d_new') }}">Créer
                                     un nouvel utilisateur</a></li>
                         </ul>
                     </li>
 
-                    <li class=" nav-item dropdown">
-
+                    <li class=" nav-item dropdown sousmenu">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Gestion des haies
                         </a>
-                        <ul class="dropdown-menu">
-                            <li> <a class="dropdown-item" href="{{ path('app_haie_c_r_u_d_index') }}">Consulter
+                        <ul class="dropdown-menu sousmenu">
+                            <li> <a class="dropdown-item sousmenu" href="{{ path('app_haie_c_r_u_d_index') }}">Consulter
                                     les haies</a></li>
-                            <li><a class="dropdown-item" <a href="{{ path('app_haie_c_r_u_d_new') }}">Créer une
+                            <li><a class="dropdown-item sousmenu" <a href="{{ path('app_haie_c_r_u_d_new') }}">Créer
+                                    une
                                     nouvelle haie</a>
                             </li>
                         </ul>
                     </li>
 
-                    <li class=" nav-item dropdown">
-
+                    <li class="nav-item dropdown sousmenu">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Gestion des catégories
                         </a>
-                        <ul class="dropdown-menu">
-                            <li> <a class="dropdown-item" href="{{ path('app_categorie_c_r_u_d_index') }}">Consulter
+                        <ul class="dropdown-menu sousmenu">
+                            <li> <a class="dropdown-item sousmenu"
+                                    href="{{ path('app_categorie_c_r_u_d_index') }}">Consulter
                                     les catégories</a></li>
-                            <li><a class="dropdown-item" <a href="{{ path('app_categorie_c_r_u_d_new') }}">Créer une
+                            <li><a class="dropdown-item sousmenu" <a
+                                    href="{{ path('app_categorie_c_r_u_d_new') }}">Créer une
                                     nouvelle catégorie</a>
                             </li>
                         </ul>
@@ -115,6 +156,12 @@
                 </ul>
 
                 <ul class="navbar-nav ms-auto">
+                    {% if app.user != null %}
+                    <li><a class="navbar-brand" href="{{ path('app_user_c_r_u_d_show', {'id': app.user.id}) }}">
+                        Mon compte
+                    </a></li>
+                    {% endif %}
+
                     {% if is_granted('ROLE_USER') %}
                     <li><a class="navbar-brand" href="{{ path('app_logout') }}">
                             Déconnexion
@@ -135,9 +182,10 @@
             </div>
         </div>
     </nav>
+
+
     </div>
-    <br>
-    <br>
+
     {% block content %}
     {% endblock %}
 </body>

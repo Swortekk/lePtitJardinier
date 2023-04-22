@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
 
-{% block body %}
-	{% block content %}
 
-		<div class="mid">
-			<div class="formulaire">
-            coucou
-			{{ hauteur }}
-			{{ longueur }}
-			{{ typeHaie }}
-			{{ user.getNom }}
-	
-            </div>
-		</div>
-	{% endblock %}
+{% block content %}
+
+
+<div class="formulaire">
+	<h1>Votre devis à été inséré avec succès</h1>
+
+	<a href="{{ path('app_show_devis_by_user') }}">Cliquez-ici pour visualiser vos devis</a>
+
+
+
+
+</div>
+
 {% endblock %}

@@ -3,15 +3,15 @@
 {% block title %}Edit Categorie{% endblock %}
 
 {% block content %}
-<div class="mid">
+
     <div class="formulaire">
-        <h1>Edit Categorie</h1>
+        <h1>Modifier une catégorie</h1>
 
-        {{ include('categorie_crud/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('categorie_crud/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-        <a href="{{ path('app_categorie_c_r_u_d_index') }}">back to list</a>
+        <a class="btn" href="{{ path('app_categorie_c_r_u_d_index') }}">Retour</a>
 
         {{ include('categorie_crud/_delete_form.html.twig') }}
     </div>
-</div>
+
 {% endblock %}

@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Devis;
+use App\Entity\User;
 use App\Form\DevisType;
 use App\Repository\DevisRepository;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use DateTime;
+use DateTimeZone;
+use Doctrine\Persistence\ManagerRegistry;
+use IntlDateFormatter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +31,7 @@ class DevisCRUDController extends AbstractController
 
 
         return $this->render('devis_crud/index.html.twig', [
-            'devis' => $devisRepository->findAll(),
+            'devis' => $devisRepository->getAllDevisInformations(),
         ]);
     }
 
@@ -55,10 +59,25 @@ class DevisCRUDController extends AbstractController
     /**
      * @Route("/{id}", name="app_devis_c_r_u_d_show", methods={"GET"})
      */
-    public function show(Devis $devi): Response
+    public function show(DevisRepository $devisRepository, Devis $devi ): Response
     {
+        
+        $monDevis = $devisRepository->getDevisInformationById($devi);
+
+        $date = $monDevis[0]['date']; // en supposant que la date est stockée en tant qu'objet DateTime dans la base de données
+        $date->setTimezone(new DateTimeZone('Europe/Paris')); // définir le fuseau horaire à Paris
+        $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+        $dateString = $formatter->format($date); // Résultat : "18 avril 2023"
+   
+        $typeClient= $monDevis[0]['type_client'];
+  
+        
         return $this->render('devis_crud/show.html.twig', [
-            'devi' => $devi,
+            'monDevis' => $monDevis,
+            'date' => $dateString,
+            'typeClient' => $typeClient,
+            'devi' => $devi
+      
         ]);
     }
 
@@ -91,8 +110,12 @@ class DevisCRUDController extends AbstractController
             $devisRepository->remove($devi, true);
         }
 
-        return $this->redirectToRoute('app_devis_c_r_u_d_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
     }
 
+
+      /**
+     * @Route("/", name="app_devis_user", methods={"GET"})
+     */
 
 }

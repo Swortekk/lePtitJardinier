@@ -38,10 +38,11 @@ class GenererDevisController extends AbstractController
 
 
         if (!empty($this->getUser())) {
+
             $mail = $this->getUser()->getUserIdentifier();
             $monUser = new User();
             $monUser = $doctrine->getRepository(User::class)->findOneBy(array('email' => $mail));
-
+          
 
             $devis = new Devis();
             $devis->setUser($monUser);
@@ -58,6 +59,9 @@ class GenererDevisController extends AbstractController
 
             return $this->render('generer_devis/index.html.twig', [
                 'controller_name' => 'GenererDevisController',
+                'user' => $monUser,
+        
+             
 
             ]);
         }
