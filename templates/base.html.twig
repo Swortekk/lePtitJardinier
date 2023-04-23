@@ -33,34 +33,34 @@
 
 <body>
     <style>
-            
         .menu {
             background-color: #4B6C21;
             color: #dbdaea;
-        
+
         }
-        
+
         .menu a {
             color: #dbdaea;
-            font-size: large;
+            font-size: small;
             margin-left: 10px;
         }
-        
-        
+
+
         .sousmenu {
             background-color: #4B6C21;
             color: #dbdaea;
             width: fit-content;
-        
+
         }
-        
+
         .sousmenu a:hover {
             background-color: #4B6C21;
-            
-        
+
+
         }
-        .menu a:hover{
-           color: #E9D985;
+
+        .menu a:hover {
+            color: #E9D985;
         }
     </style>
     <!-- Navbar content -->
@@ -158,8 +158,8 @@
                 <ul class="navbar-nav ms-auto">
                     {% if app.user != null %}
                     <li><a class="navbar-brand" href="{{ path('app_user_c_r_u_d_show', {'id': app.user.id}) }}">
-                        Mon compte
-                    </a></li>
+                            Mon compte
+                        </a></li>
                     {% endif %}
 
                     {% if is_granted('ROLE_USER') %}
