@@ -4,14 +4,21 @@
 
 {% block content %}
 
-    <div class="formulaire">
-        <h1>Modifier une catégorie</h1>
 
-        {{ include('categorie_crud/_form.html.twig', {'button_label': 'Modifier'}) }}
+<style>
+    .formulaire a {
+        margin: 10px;
+    }
+</style>
 
-        <a class="btn" href="{{ path('app_categorie_c_r_u_d_index') }}">Retour</a>
+<div class="formulaire">
+    <h1>Modifier une catégorie</h1>
 
-        {{ include('categorie_crud/_delete_form.html.twig') }}
-    </div>
+    <a>{{ include('categorie_crud/_form.html.twig', {'button_label': 'Modifier'}) }}</a>
+
+    <a class="btn" href="{{ path('app_categorie_c_r_u_d_index') }}">Retour</a>
+
+    <a>{{ include('categorie_crud/_delete_form.html.twig') }}</a>
+</div>
 
 {% endblock %}

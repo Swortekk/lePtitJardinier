@@ -21,7 +21,10 @@ class MesureController extends AbstractController
         $req = Request::createFromGlobals();
         $session = new Session();
 
-       
+
+
+
+
 
         $mesHaies = $doctrine->getRepository(Haie::class)->findAll();
 
