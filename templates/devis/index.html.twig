@@ -13,71 +13,72 @@
 	}
 </style>
 
-	<div class="formulaire">
+<div class="formulaire">
 
-		<lord-icon src="https://cdn.lordicon.com/nrxxmbbt.json" trigger="hover"
-			style="width:100px;height:100px"></lord-icon>
-		<h1>Récapitulatif de votre demande</h1>
-		<br>
-		<p>
-			{% set montantRemise = 0 %}
-			{% set montantDevis = 0 %}
-			{% set remise = 0.1 %}
-			{% set prix = maHaie.getPrix() * longueur %}
-
-			Vous êtes
-			{% if ( typeClient == 'E') %}
-			une
-			<strong>entreprise</strong>
-			(vous bénéficiez d'une remise de 10%).
-
-			{% else %}
-			un
-			<strong>particulier</strong>
-
-			{% endif %}
-		</p>
-		<p>
-			<strong>Rappel --</strong>
-			Mesures de la haie :
-		</p>
-		<p>
-			Longueur
-			<strong>{{longueur}} m</strong>
-			Hauteur
-			<strong>{{hauteur}} m</strong>
-		</p>
+	<lord-icon src="https://cdn.lordicon.com/nrxxmbbt.json" trigger="hover"
+		style="width:100px;height:100px"></lord-icon>
+	<h1>Récapitulatif de votre demande</h1>
+	<br>
+	<p>
+		{% set montantRemise = 0 %}
+		{% set montantDevis = 0 %}
+		{% set remise = 0.1 %}
+		{% set prix = maHaie.getPrix() * longueur %}
 
 
-		{% if hauteur > 1.50 %}
-		{% set prix = prix * 1.50 %}
+		{% if ( typeClient == 'E') %}
+
+		<strong> Vous êtes une entreprise</strong>
+		(vous bénéficiez d'une remise de 10%).
+
 		{% endif %}
+		{% if ( typeClient == 'P') %}
 
-		{% set montantRemise = prix * remise %}
+		<strong> Vous êtes un particulier</strong>
+		(vous ne bénéficiez pas de remise).
+		{% endif %}
+	</p>
+	<p>
+		<strong>Rappel --</strong>
+		Mesures de la haie :
+	</p>
+	<p>
+		Longueur
+		<strong>{{longueur}} m</strong>
+		Hauteur
+		<strong>{{hauteur}} m</strong>
+	</p>
 
-		{% if typeClient == 'E' %}
-		{% set montantDevis = prix - montantRemise %}
-		Vous avez obtenu une remise de
-		<strong>{{montantRemise}}
+
+	{% if hauteur > 1.50 %}
+	{% set prix = prix * 1.50 %}
+	{% endif %}
+
+	{% set montantRemise = prix * remise %}
+
+	{% if typeClient == 'E' %}
+	{% set montantDevis = prix - montantRemise %}
+	Vous avez obtenu une remise de
+	<strong>{{montantRemise}}
+		€</strong>
+	{% else %}
+	{% set montantDevis = prix %}
+	{% endif %}
+	</p>
+	<p>
+		Le montant de votre de devis est de
+		<strong>
+			{{montantDevis}}
 			€</strong>
-		{% else %}
-		{% set montantDevis = prix %}
-		{% endif %}
-		</p>
-		<p>
-			Le montant de votre de devis est de
-			<strong>
-				{{montantDevis}}
-				€</strong>
-		</p>
-		{% if app.user == null %}
-		<a class="btn" href="{{path('app_register')}}">Veuillez vous inscrire pour créer un devis</a>
-		<br>
-		<a href="{{path('app_login')}}">Vous êtes déjà inscrit ? Connectez-vous</a>
-		{% else %}
-		<a class="btn" href="{{path('app_generer_devis')}}">Générer le devis</a>
-		{% endif %}
- 
+	</p>
+	{% if app.user == null %}
+	<a class="btn" href="{{path('app_register')}}">Veuillez vous inscrire pour créer un devis</a>
+	<br>
+	<a href="{{path('app_login')}}">Vous êtes déjà inscrit ? Connectez-vous</a>
+	{% else %}
+	<a class="btn" href="{{path('app_generer_devis')}}">Générer le devis</a>
+	{% endif %}
+
 </div>
 
 

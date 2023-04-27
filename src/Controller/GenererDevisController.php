@@ -15,6 +15,8 @@ use App\Entity\Haie;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 class GenererDevisController extends AbstractController
@@ -42,7 +44,7 @@ class GenererDevisController extends AbstractController
             $mail = $this->getUser()->getUserIdentifier();
             $monUser = new User();
             $monUser = $doctrine->getRepository(User::class)->findOneBy(array('email' => $mail));
-          
+
 
             $devis = new Devis();
             $devis->setUser($monUser);
@@ -60,8 +62,8 @@ class GenererDevisController extends AbstractController
             return $this->render('generer_devis/index.html.twig', [
                 'controller_name' => 'GenererDevisController',
                 'user' => $monUser,
-        
-             
+
+
 
             ]);
         }

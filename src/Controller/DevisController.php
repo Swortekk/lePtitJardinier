@@ -43,6 +43,8 @@ class DevisController extends AbstractController
             $monUser = $doctrine->getRepository(User::class)->findOneBy(array('email' => $mail));
             $typeClient = $monUser->getTypeClient();
 
+        } else {
+            $typeClient = "";
         }
 
 

@@ -63,9 +63,13 @@
 
 <body>
     <br>
+    {% for info in monDevis %}
+    {% if (app.user.email == info.email) %}
+
+
     <div class="tableau">
         <main>
-            {% for info in monDevis %}
+
             <h2>Informations sur le devis</h2>
             <br>
             <p><strong>Référence :</strong> {{info.id}} </p>
@@ -124,21 +128,23 @@
                     </tr>
 
 
-                    {% endfor %}
+
 
                 </tbody>
             </table>
 
-            
 
-            <a href="{{ path('app_accueil') }}"><lord-icon src="https://cdn.lordicon.com/wjhsmbda.json"
-                    trigger="hover" style="width:47px;height:47px">
+
+            <a href="{{ path('app_accueil') }}"><lord-icon src="https://cdn.lordicon.com/wjhsmbda.json" trigger="hover"
+                    style="width:47px;height:47px">
                 </lord-icon></a>
 
             <a>{{ include('devis_crud/_delete_form.html.twig') }}</a>
 
         </main>
     </div>
-
-
+    {% else %}
+    <h1>Vous n'avez pas accès à cette page</h1>
+    {% endif %}
+    {% endfor %}
     {% endblock %}

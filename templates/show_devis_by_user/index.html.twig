@@ -12,11 +12,10 @@
         text-align: center;
     }
 
-    h1{
+    h1 {
         text-align: center;
         margin-bottom: 40px;
     }
- 
 </style>
 
 <div class="tableau">
@@ -46,7 +45,7 @@
                 <td>{{ devis.haie}}</td>
                 <td>{{ devis.longueur }}</td>
                 <td>{{ devis.hauteur }}</td>
-                <td><a class="btn"href="{{ path('app_devis_c_r_u_d_show', {'id': devis.id}) }}">Afficher</a></td>
+                <td><a class="btn" href="{{ path('app_devis_c_r_u_d_show', {'id': devis.id}) }}">Afficher</a></td>
             </tr>
             {% else %}
             <tr>

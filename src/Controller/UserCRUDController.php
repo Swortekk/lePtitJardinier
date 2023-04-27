@@ -8,14 +8,18 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/user/c/r/u/d")
+ * 
  */
 class UserCRUDController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/", name="app_user_c_r_u_d_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
@@ -26,6 +30,7 @@ class UserCRUDController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="app_user_c_r_u_d_new", methods={"GET", "POST"})
      */
     public function new(Request $request, UserRepository $userRepository): Response
@@ -58,6 +63,7 @@ class UserCRUDController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="app_user_c_r_u_d_edit", methods={"GET", "POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
