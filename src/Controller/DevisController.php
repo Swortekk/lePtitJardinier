@@ -30,17 +30,9 @@ class DevisController extends AbstractController
         $hauteur = $req->get('txtHauteur');
         $type = $req->get('txtType');
 
-
-        if (is_numeric($longueur) && is_numeric($hauteur)) {
-            $session->set('hauteur', $hauteur);
-            $session->set('longueur', $longueur);
-            $session->set('typeHaie', $type);
-        } else {
-            return $this->redirectToRoute('app_mesure');
-
-        }
-
-
+        $session->set('hauteur', $hauteur);
+        $session->set('longueur', $longueur);
+        $session->set('typeHaie', $type);
 
         $maHaie = $doctrine->getRepository(Haie::class)->find($type);
 
@@ -52,9 +44,6 @@ class DevisController extends AbstractController
             $typeClient = $monUser->getTypeClient();
 
         }
-
-
-
 
 
         return $this->render('devis/index.html.twig', [
