@@ -37,8 +37,9 @@
 
 <div class="formulaire">
     <main>
+        {% if (user.email == app.user.email) or (app.user.roles == ["ROLE_ADMIN"]) %}
         <section>
-            {% if app.user.email  == "admin@gmail.com" %}
+            {% if user.roles == ["ROLE_ADMIN"] %}
             <h1>Informations de l'utilisateur</h1>
             {% elseif user.roles == ["ROLE_USER"] %}
             <h1>Mes informations personnelles</h1>
@@ -58,17 +59,17 @@
                         <strong>Email :</strong>
                         <span>{{user.email}}</span>
                     </li>
-                  
+
                 </ul>
             </div>
         </section>
         <section>
-            {% if app.user.email  == "admin@gmail.com" %}
+            {% if user.roles == ["ROLE_ADMIN"] %}
             <h1>Adresse de l'utilisateur</h1>
             {% elseif user.roles == ["ROLE_USER"] %}
             <h1>Mon adresse</h1>
             {% endif %}
-     
+
             <div class="container">
                 <ul>
                     <li>
@@ -88,7 +89,7 @@
             </div>
         </section>
         <section>
-            {% if app.user.email  == "admin@gmail.com" %}
+            {% if user.roles == ["ROLE_ADMIN"] %}
             <h1>Compte de l'utilisateur</h1>
             {% elseif user.roles == ["ROLE_USER"] %}
             <h1>Mon compte</h1>
@@ -105,7 +106,7 @@
                     </li>
                     <li>
                         <strong>Permissions :</strong>
-                        {% if user.roles  == ["ROLE_ADMIN","ROLE_USER"] %}
+                        {% if user.roles == ["ROLE_ADMIN","ROLE_USER"] %}
                         <span>Administrateur</span>
                         {% elseif user.roles == ["ROLE_USER"] %}
                         <span>Utilisateur</span>
@@ -113,8 +114,10 @@
                     </li>
                 </ul>
             </div>
-        <a class="btn" href="{{ path('app_user_c_r_u_d_edit', {'id': user.id}) }}">Modifier</a>
-        
+            <a class="btn" href="{{ path('app_user_c_r_u_d_edit', {'id': user.id}) }}">Modifier</a>
+            {% else %}
+            <h1>Vous n'avez pas accès à cette page</h1>
+            {% endif %}
     </main>
 </div>
 

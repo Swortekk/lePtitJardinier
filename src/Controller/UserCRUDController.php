@@ -63,7 +63,7 @@ class UserCRUDController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="app_user_c_r_u_d_edit", methods={"GET", "POST"})
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      */
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {

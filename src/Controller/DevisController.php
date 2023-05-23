@@ -33,6 +33,9 @@ class DevisController extends AbstractController
         $session->set('hauteur', $hauteur);
         $session->set('longueur', $longueur);
         $session->set('typeHaie', $type);
+        if ($type == "") {
+            return $this->redirectToRoute('app_mesure');
+        }
 
         $maHaie = $doctrine->getRepository(Haie::class)->find($type);
 

@@ -18,28 +18,36 @@ class ShowDevisByUserController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
 
-        $mail = $this->getUser()->getUserIdentifier();
-        $monUser = new User();
-        $monUser = $doctrine->getRepository(User::class)->findOneBy(array('email' => $mail));
 
-        $devisRepository = $doctrine->getRepository(Devis::class);
-        
-        $listeDevis = $devisRepository->findBy(array('user' => $monUser));
+        if (!empty($this->getUser())) {
+
+            $mail = $this->getUser()->getUserIdentifier();
+            $monUser = new User();
+            $monUser = $doctrine->getRepository(User::class)->findOneBy(array('email' => $mail));
+            $devisRepository = $doctrine->getRepository(Devis::class);
+
+            $listeDevis = $devisRepository->findBy(array('user' => $monUser));
+        } else {
+
+            return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
+        }
+
+
 
         // ou ça     
         // $listeDevis = $devisRepository->findBy(['user' => $monUser->getId()]);
-    
 
- 
+
+
 
         return $this->render('show_devis_by_user/index.html.twig', [
             'controller_name' => 'ShowDevisByUserController',
             'listeDevis' => $listeDevis,
             'monUser' => $monUser,
-     
+
         ]);
     }
 
 
-    
+
 }
