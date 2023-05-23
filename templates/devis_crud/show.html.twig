@@ -64,7 +64,7 @@
 <body>
     <br>
     {% for info in monDevis %}
-    {% if (app.user.email == info.email or app.user.email == 'admin@gmail.com') %}
+    {% if (app.user.email == info.email or app.user.roles == ["ROLE_ADMIN"]) %}
 
 
     <div class="tableau">

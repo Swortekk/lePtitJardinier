@@ -56,6 +56,9 @@ class UserCRUDController extends AbstractController
      */
     public function show(User $user): Response
     {
+        if (empty($this->getUser())) {
+            return $this->redirectToRoute('app_login');
+        }
         return $this->render('user_crud/show.html.twig', [
             'user' => $user,
         ]);
